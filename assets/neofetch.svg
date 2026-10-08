@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="360" viewBox="0 0 860 360" font-family="'JetBrains Mono','Cascadia Code',Consolas,'Courier New',monospace">
+  <style>
+    :root { --bg:#0d1117; --bar:#161b22; --line:#30363d; --fg:#c9d1d9; --dim:#8b949e; --acc:#f5a623; --acc2:#ff6b6b; --ok:#3fb950; }
+    @media (prefers-color-scheme: light) {
+      :root { --bg:#ffffff; --bar:#f6f8fa; --line:#d0d7de; --fg:#24292f; --dim:#57606a; --acc:#c46a00; --acc2:#cf222e; --ok:#1a7f37; }
+    }
+    .bg { fill:var(--bg); stroke:var(--line); }
+    .bar { fill:var(--bar); }
+    .t { fill:var(--fg); font-size:14px; white-space:pre; }
+    .k { fill:var(--acc); font-weight:700; }
+    .d { fill:var(--dim); }
+    .art { fill:var(--acc); font-size:15px; white-space:pre; }
+    .p { fill:var(--ok); font-weight:700; }
+    .ln { opacity:0; animation: in .35s ease-out forwards; }
+    @keyframes in { from { opacity:0; transform:translateX(-6px); } to { opacity:1; transform:none; } }
+    .cur { fill:var(--acc); animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity:0; } }
+    @media (prefers-reduced-motion: reduce) { .ln { animation:none; opacity:1; } .cur { animation:none; } }
+  </style>
+
+  <!-- window -->
+  <rect class="bg" x="0.5" y="0.5" width="859" height="359" rx="12"/>
+  <path class="bar" d="M12.5 0.5h835a12 12 0 0 1 12 12v22h-859v-22a12 12 0 0 1 12-12z"/>
+  <circle cx="22" cy="18" r="6" fill="#ff5f57"/>
+  <circle cx="42" cy="18" r="6" fill="#febc2e"/>
+  <circle cx="62" cy="18" r="6" fill="#28c840"/>
+  <text x="430" y="22" text-anchor="middle" class="t d" font-size="12">vivansh@github: ~</text>
+
+  <!-- prompt -->
+  <text x="24" y="64" class="t ln" style="animation-delay:.1s"><tspan class="p">vivansh@github</tspan><tspan class="d">:~$ </tspan>neofetch</text>
+
+  <!-- ascii art: VG -->
+  <g class="ln" style="animation-delay:.4s">
+    <text x="24" y="104" class="art">██╗   ██╗ ██████╗ </text>
+    <text x="24" y="124" class="art">██║   ██║██╔════╝ </text>
+    <text x="24" y="144" class="art">██║   ██║██║  ███╗</text>
+    <text x="24" y="164" class="art">╚██╗ ██╔╝██║   ██║</text>
+    <text x="24" y="184" class="art"> ╚████╔╝ ╚██████╔╝</text>
+    <text x="24" y="204" class="art">  ╚═══╝   ╚═════╝ </text>
+  </g>
+
+  <!-- info -->
+  <text x="300" y="96"  class="t ln" style="animation-delay:.6s"><tspan class="k">vivansh</tspan><tspan class="d">@</tspan><tspan class="k">garg</tspan></text>
+  <text x="300" y="112" class="t d ln" style="animation-delay:.7s">───────────────────────────────────────────</text>
+  <text x="300" y="136" class="t ln" style="animation-delay:0.8s"><tspan class="k">Edu      </tspan>B.Tech CSE (Data Science) · MUJ '28</text>
+  <text x="300" y="158" class="t ln" style="animation-delay:0.9s"><tspan class="k">Focus    </tspan>Retrieval · Deepfakes · Graphs · Fairness</text>
+  <text x="300" y="180" class="t ln" style="animation-delay:1.0s"><tspan class="k">Langs    </tspan>Python · Java · C++ · JavaScript</text>
+  <text x="300" y="202" class="t ln" style="animation-delay:1.1s"><tspan class="k">Stack    </tspan>PyTorch · FastAPI · Node · React · Docker</text>
+  <text x="300" y="224" class="t ln" style="animation-delay:1.2s"><tspan class="k">Status   </tspan>open to internships · always building</text>
+  <text x="300" y="246" class="t ln" style="animation-delay:1.3s"><tspan class="k">Contact  </tspan>vivanshgarg05@gmail.com</text>
+  <text x="300" y="268" class="t ln" style="animation-delay:1.4s"><tspan class="k">LinkedIn </tspan>in/vivansh-garg</text>
+
+  <!-- palette -->
+  <g class="ln" style="animation-delay:1.6s">
+    <rect x="300" y="286" width="26" height="14" fill="#0d1117" stroke="#30363d"/>
+    <rect x="326" y="286" width="26" height="14" fill="#ff6b6b"/>
+    <rect x="352" y="286" width="26" height="14" fill="#3fb950"/>
+    <rect x="378" y="286" width="26" height="14" fill="#f5a623"/>
+    <rect x="404" y="286" width="26" height="14" fill="#58a6ff"/>
+    <rect x="430" y="286" width="26" height="14" fill="#bc8cff"/>
+    <rect x="456" y="286" width="26" height="14" fill="#39c5cf"/>
+    <rect x="482" y="286" width="26" height="14" fill="#c9d1d9"/>
+  </g>
+
+  <!-- next prompt -->
+  <text x="24" y="334" class="t ln" style="animation-delay:1.9s"><tspan class="p">vivansh@github</tspan><tspan class="d">:~$ </tspan></text>
+  <rect class="cur ln" x="182" y="322" width="9" height="16" style="animation-delay:1.9s"/>
+</svg>
