@@ -32,7 +32,7 @@ vivansh@github:~$ git log --oneline --graph projects/
 | 🟠 | `5ih2026` | **[VaaniRakshak](https://github.com/Vivansh-07/VaaniRakshak-AI)** | Real-time call-risk assistant for **voice-cloning fraud**. Combines *voice risk* (is the speech synthetic?) with *action risk* (is the caller pushing a UPI scan, OTP or urgent transfer?) and warns the listener **during** the call. Smart India Hackathon 2026 | `PyTorch` `Whisper` `SSE` |
 | 🟠 | `e4a71c2` | **[RepoAtlas](https://repoatlas-iqbu.onrender.com)** | Paste a GitHub repo, get an **interactive dependency map** of its Python modules: PageRank for importance, Louvain for clusters, red halos for circular imports. Plus a Graph Lab for random-graph models. **Live demo ↗** | `FastAPI` `NetworkX` `Cytoscape.js` |
 | 🟠 | `0.742nd` | **Hybrid Retrieval QA** | BM25 + dense + Reciprocal Rank Fusion + cross-encoder reranking for **scientific QA on SciFact**. Full ablation with significance tests; a fine-tuned encoder reaches **nDCG@10 0.742**, up from 0.656 for BM25 | `PyTorch` `FAISS` `BEIR` |
-| 🟠 | `b1a5v6a` | **Bias-Aware Candidate Auditor** | Flags feature blocks linked to **label corruption** before a model is trained, without being told which columns are sensitive, or **abstains** when the evidence isn't there. Team project, DSE3170 PBL-3 | `Streamlit` `Statistics` `Fairness` |
+| 🟠 | `b1a5v6a` | **[Bias-Aware Candidate Auditor](https://github.com/Vivansh-07/Bias-Aware-Candidate-Auditor)** | Flags feature blocks linked to **label corruption** before a model is trained, without being told which columns are sensitive, or **abstains** when the evidence isn't there. Team project, DSE3170 PBL-3 | `Streamlit` `Statistics` `Fairness` |
 | ⚪ | `HEAD` | *next big thing* | currently in the oven… | `???` |
 
 <details>
