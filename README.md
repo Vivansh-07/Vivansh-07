@@ -32,7 +32,8 @@ vivansh@github:~$ git log --oneline --graph projects/
 | 🟠 | `5ih2026` | **[VaaniRakshak](https://github.com/Vivansh-07/VaaniRakshak-AI)** | Real-time call-risk assistant for **voice-cloning fraud**. Combines *voice risk* (is the speech synthetic?) with *action risk* (is the caller pushing a UPI scan, OTP or urgent transfer?) and warns the listener **during** the call. Smart India Hackathon 2026 | `PyTorch` `Whisper` `SSE` |
 | 🟠 | `e4a71c2` | **[RepoAtlas](https://repoatlas-iqbu.onrender.com)** | Paste a GitHub repo, get an **interactive dependency map** of its Python modules: PageRank for importance, Louvain for clusters, red halos for circular imports. Plus a Graph Lab for random-graph models. **Live demo ↗** | `FastAPI` `NetworkX` `Cytoscape.js` |
 | 🟠 | `0.742nd` | **Hybrid Retrieval QA** | BM25 + dense + Reciprocal Rank Fusion + cross-encoder reranking for **scientific QA on SciFact**. Full ablation with significance tests; a fine-tuned encoder reaches **nDCG@10 0.742**, up from 0.656 for BM25 | `PyTorch` `FAISS` `BEIR` |
-| 🟠 | `b1a5v6a` | **[Bias-Aware Candidate Auditor](https://github.com/Vivansh-07/Bias-Aware-Candidate-Auditor)** | Flags feature blocks linked to **label corruption** before a model is trained, without being told which columns are sensitive, or **abstains** when the evidence isn't there. Team project, DSE3170 PBL-3 | `Streamlit` `Statistics` `Fairness` |
+| 🟠 | `b1a5v6a` | **[Bias-Aware Candidate Auditor](https://github.com/Vivansh-07/Bias-Aware-Candidate-Auditor)** | Flags feature blocks linked to **label corruption** before a model is trained, without being told which columns are sensitive, or **abstains** when the evidence isn't there. Team project, DSE3170 PBL-3. **[Try the app ↗](https://bias-aware-candidate-auditor.streamlit.app)** | `Streamlit` `Statistics` `Fairness` |
+| 📄 | `0of660` | **[Fairness with Few Demographic Labels](https://github.com/Vivansh-07/Bias_detection)** | Research paper draft (co-author). Without group labels, audits **never found** the hidden unfair group (0 of 660). But **~100 labelled people** are enough to *measure* the bias, and a pre-registered safety rule cut **harmful fixes from 26% to 7%** | `Python` `Fairness` `Pre-registered` |
 | ⚪ | `HEAD` | *next big thing* | currently in the oven… | `???` |
 
 <details>
@@ -67,7 +68,8 @@ LISTEN → UNDERSTAND → DETECT → WARN → VERIFY → PREVENT → REPORT
 - **Modules or packages:** Flask's 82 modules collapse into 20 packages, with package-level cycles
 - **Four layouts** (Force, Hierarchy, Rings, Circle), each answering a different question about structure
 - **Graph Lab:** Erdős–Rényi, Barabási–Albert and Watts–Strogatz generators with log–log degree plots
-- Shareable links, PNG export, deployed on Render
+- **Stress-tested on 16 repos it had never seen** (FastAPI, Django, numpy, Pydantic…); a sparse partial clone took numpy from a 60 s timeout to 12 s
+- 174 tests, shareable links, PNG export, deployed on Render
 
 </details>
 
@@ -89,7 +91,7 @@ query ─┬─ BM25 (inverted index) ──┐
 | RRF fusion | 0.710 |
 | **Dense, fine-tuned on SciFact train** | **0.742** |
 
-Paired bootstrap tests show fusion helps only when the two retrievers are of similar strength, and the reranker isn't worth its ~3× latency. 72 tests, a written paper and a side-by-side web demo.
+Paired bootstrap tests show fusion helps only when the two retrievers are of similar strength, and the reranker isn't worth its ~3× latency. 100 tests, a written paper and a side-by-side web demo.
 
 </details>
 
@@ -102,8 +104,26 @@ Paired bootstrap tests show fusion helps only when the two retrievers are of sim
 - Benjamini–Yekutieli correction across feature blocks: it **flags only what survives**, otherwise it abstains
 - Streamlit app with a synthetic lab, real-data audits (COMPAS, German Credit, Heart Disease) and live calibration
 - On COMPAS with 30% injected corruption, audit-guided reweighting removes most of the over-prediction for the affected group
+- Pre-registered real-data calibration on 5,000 fresh splits · 37 tests · [hosted on Streamlit Cloud](https://bias-aware-candidate-auditor.streamlit.app)
 
 <sub>Team: Soumya Shradha · Tanishk Gangwar · Yagya Salwan · Vivansh Garg · Guide: Dr. Chirag Joshi</sub>
+
+</details>
+
+<details>
+<summary><b>📄 inside Fairness with Few Demographic Labels</b></summary>
+
+<br/>
+
+| | question | answer |
+|:-:|:--|:--|
+| 🔍 | Can you *find* the unfair group with no demographic data? | **No.** 0 of 660 audits ranked the hidden group first |
+| 📏 | Can you *measure* unfairness with a little data? | **Yes.** About 100 labelled people, accurate on all 18 datasets checked |
+| 🔧 | Can you *fix* it with that little data? | **Only when the gap is big.** A pre-registered safety rule cut harmful fixes from 26% to 7% |
+
+Tested on 9 classic datasets and 10 US census states, 30 seeds per test, with the safety threshold fixed *before* seeing the new states.
+
+<sub>Chirag Joshi · Soumya Shradha · Tanishk Gangwar · Vivansh Garg · Yagya Salwan · Manipal University Jaipur</sub>
 
 </details>
 
@@ -115,8 +135,8 @@ vivansh@github:~$ ./status --now
 
 ```diff
 + building   ▰▰▰▰▰▰▱▱▱▱  VaaniRakshak · live call audio + Indian-language model next
-+ shipped    ▰▰▰▰▰▰▰▰▰▱  RepoAtlas is live on Render
-+ research   ▰▰▰▰▰▰▰▱▱▱  hybrid retrieval: ablations, significance tests, paper
++ shipped    ▰▰▰▰▰▰▰▰▰▱  RepoAtlas on Render · Bias Auditor on Streamlit Cloud
++ research   ▰▰▰▰▰▰▰▱▱▱  2 paper drafts: hybrid retrieval QA · fairness with few demographic labels
 + learning   ▰▰▰▰▰▱▱▱▱▱  whatever the next project needs
 ! open to    SWE / ML internships · let's talk → vivanshgarg05@gmail.com
 - bugs       ▰▰▰▰▰▰▰▰▰▰  infinite (but fixing them)
