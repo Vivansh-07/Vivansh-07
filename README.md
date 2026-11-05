@@ -33,7 +33,7 @@ vivansh@github:~$ git log --oneline --graph projects/
 | 🟠 | `e4a71c2` | **[RepoAtlas](https://repoatlas-iqbu.onrender.com)** | Paste a GitHub repo, get an **interactive dependency map** of its Python modules: PageRank for importance, Louvain for clusters, red halos for circular imports. Plus a Graph Lab for random-graph models. **Live demo ↗** | `FastAPI` `NetworkX` `Cytoscape.js` |
 | 🟠 | `0.742nd` | **Hybrid Retrieval QA** | BM25 + dense + Reciprocal Rank Fusion + cross-encoder reranking for **scientific QA on SciFact**. Full ablation with significance tests; a fine-tuned encoder reaches **nDCG@10 0.742**, up from 0.656 for BM25 | `PyTorch` `FAISS` `BEIR` |
 | 🟠 | `b1a5v6a` | **[Bias-Aware Candidate Auditor](https://github.com/Vivansh-07/Bias-Aware-Candidate-Auditor)** | Flags feature blocks linked to **label corruption** before a model is trained, without being told which columns are sensitive, or **abstains** when the evidence isn't there. Team project, DSE3170 PBL-3. **[Try the app ↗](https://bias-aware-candidate-auditor.streamlit.app)** | `Streamlit` `Statistics` `Fairness` |
-| 📄 | `0of660` | **[Fairness with Few Demographic Labels](https://github.com/Vivansh-07/Bias_detection)** | Research paper draft (co-author). Without group labels, audits **never found** the hidden unfair group (0 of 660). But **~100 labelled people** are enough to *measure* the bias, and a pre-registered safety rule cut **harmful fixes from 26% to 7%** | `Python` `Fairness` `Pre-registered` |
+| 📄 | `0of660` | **[Fairness with Few Demographic Labels](https://github.com/Vivansh-07/Bias_detection)** | Research paper draft (co-author). Without group labels, audits **never found** the hidden unfair group (0 of 660). But **~100 labelled people** are enough to *measure* the bias, and a pre-registered safety rule cut **harmful fixes from 26% to 7%**. **[Try the app ↗](https://hidden-group-bias.streamlit.app)** | `Python` `Fairness` `Pre-registered` |
 | ⚪ | `HEAD` | *next big thing* | currently in the oven… | `???` |
 
 <details>
@@ -123,6 +123,8 @@ Paired bootstrap tests show fusion helps only when the two retrievers are of sim
 
 Tested on 9 classic datasets and 10 US census states, 30 seeds per test, with the safety threshold fixed *before* seeing the new states.
 
+Try it in the **[Hidden-Group Bias Lab ↗](https://hidden-group-bias.streamlit.app)**: pick a dataset and a hidden group, choose how many people reveal theirs, and rerun the study's Find · Measure · Fix steps. For the study's seeds it reproduces the stored runs exactly (26 tests).
+
 <sub>Chirag Joshi · Soumya Shradha · Tanishk Gangwar · Vivansh Garg · Yagya Salwan · Manipal University Jaipur</sub>
 
 </details>
@@ -135,7 +137,7 @@ vivansh@github:~$ ./status --now
 
 ```diff
 + building   ▰▰▰▰▰▰▱▱▱▱  VaaniRakshak · live call audio + Indian-language model next
-+ shipped    ▰▰▰▰▰▰▰▰▰▱  RepoAtlas on Render · Bias Auditor on Streamlit Cloud
++ shipped    ▰▰▰▰▰▰▰▰▰▱  RepoAtlas on Render · Bias Auditor + Hidden-Group Bias Lab on Streamlit Cloud
 + research   ▰▰▰▰▰▰▰▱▱▱  2 paper drafts: hybrid retrieval QA · fairness with few demographic labels
 + learning   ▰▰▰▰▰▱▱▱▱▱  whatever the next project needs
 ! open to    SWE / ML internships · let's talk → vivanshgarg05@gmail.com
