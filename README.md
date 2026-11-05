@@ -31,7 +31,7 @@ vivansh@github:~$ git log --oneline --graph projects/
 |:-:|:--|:--|:--|:--|
 | 🟠 | `5ih2026` | **[VaaniRakshak](https://github.com/Vivansh-07/VaaniRakshak-AI)** | Real-time call-risk assistant for **voice-cloning fraud**. Combines *voice risk* (is the speech synthetic?) with *action risk* (is the caller pushing a UPI scan, OTP or urgent transfer?) and warns the listener **during** the call. Smart India Hackathon 2026 | `PyTorch` `Whisper` `SSE` |
 | 🟠 | `e4a71c2` | **[RepoAtlas](https://repoatlas-iqbu.onrender.com)** | Paste a GitHub repo, get an **interactive dependency map** of its Python modules: PageRank for importance, Louvain for clusters, red halos for circular imports. Plus a Graph Lab for random-graph models. **Live demo ↗** | `FastAPI` `NetworkX` `Cytoscape.js` |
-| 🟠 | `0.742nd` | **Hybrid Retrieval QA** | BM25 + dense + Reciprocal Rank Fusion + cross-encoder reranking for **scientific QA on SciFact**. Full ablation with significance tests; a fine-tuned encoder reaches **nDCG@10 0.742**, up from 0.656 for BM25 | `PyTorch` `FAISS` `BEIR` |
+| 🟠 | `0.759nd` | **Hybrid Retrieval QA** | Evidence retrieval for **scientific claim verification**. Fine-tune a small encoder, then fuse it with BM25 at a weight *below a break-even point derived in the paper*. **nDCG@10 0.759 vs 0.715** for the standard BM25 + dense + reranker pipeline (p = 0.003), at about a third of the latency, with no reranker | `PyTorch` `FAISS` `BEIR` `LaTeX` |
 | 🟠 | `b1a5v6a` | **[Bias-Aware Candidate Auditor](https://github.com/Vivansh-07/Bias-Aware-Candidate-Auditor)** | Flags feature blocks linked to **label corruption** before a model is trained, without being told which columns are sensitive, or **abstains** when the evidence isn't there. Team project, DSE3170 PBL-3. **[Try the app ↗](https://bias-aware-candidate-auditor.streamlit.app)** | `Streamlit` `Statistics` `Fairness` |
 | 📄 | `0of660` | **[Fairness with Few Demographic Labels](https://github.com/Vivansh-07/Bias_detection)** | Research paper draft (co-author). Without group labels, audits **never found** the hidden unfair group (0 of 660). But **~100 labelled people** are enough to *measure* the bias, and a pre-registered safety rule cut **harmful fixes from 26% to 7%**. **[Try the app ↗](https://hidden-group-bias.streamlit.app)** | `Python` `Fairness` `Pre-registered` |
 | ⚪ | `HEAD` | *next big thing* | currently in the oven… | `???` |
@@ -69,6 +69,7 @@ LISTEN → UNDERSTAND → DETECT → WARN → VERIFY → PREVENT → REPORT
 - **Four layouts** (Force, Hierarchy, Rings, Circle), each answering a different question about structure
 - **Graph Lab:** Erdős–Rényi, Barabási–Albert and Watts–Strogatz generators with log–log degree plots
 - **Stress-tested on 16 repos it had never seen** (FastAPI, Django, numpy, Pydantic…); a sparse partial clone took numpy from a 60 s timeout to 12 s
+- Finds loops at any scale: in numpy, **111 of 456 modules** form a single circular-dependency group
 - 174 tests, shareable links, PNG export, deployed on Render
 
 </details>
@@ -79,19 +80,18 @@ LISTEN → UNDERSTAND → DETECT → WARN → VERIFY → PREVENT → REPORT
 <br/>
 
 ```
-query ─┬─ BM25 (inverted index) ──┐
-       │                          ├─► RRF fusion ─► cross-encoder rerank ─► cited answer
-       └─ dense bi-encoder + FAISS┘
+query ─┬─ BM25 (inverted index) ─────────┐  weight below (k+1)/(k+K) ≈ 0.38,
+       │                                 ├─► so BM25 can only re-order, never add ─► cited answer
+       └─ fine-tuned MiniLM + FAISS ─────┘  (no cross-encoder needed)
 ```
 
-| variant (SciFact test, 300 claims) | nDCG@10 |
-|:--|:-:|
-| BM25 | 0.656 |
-| Dense (MiniLM) | 0.679 |
-| RRF fusion | 0.710 |
-| **Dense, fine-tuned on SciFact train** | **0.742** |
+| nDCG@10 on test queries | SciFact (300) | NFCorpus (323) |
+|:--|:-:|:-:|
+| Standard: BM25 + dense fusion → cross-encoder rerank | 0.715 · 329 ms | 0.358 · 168 ms |
+| **Improved:** fine-tuned encoder + weighted fusion, no reranker | **0.759 · 114 ms** | 0.350 · 29 ms |
+| Paired bootstrap | +0.043, p = 0.003 | level (p = 0.35), ~6× faster |
 
-Paired bootstrap tests show fusion helps only when the two retrievers are of similar strength, and the reranker isn't worth its ~3× latency. 100 tests, a written paper and a side-by-side web demo.
+Every comparison has a significance test; the whole thing runs offline on a 4 GB laptop GPU. Written up as a **full paper (~40 pages)**: *Improving Evidence Retrieval for Scientific Claim Verification: In-Domain Fine-Tuning with Analytically Weighted Rank Fusion*. 169 tests.
 
 </details>
 
@@ -104,7 +104,7 @@ Paired bootstrap tests show fusion helps only when the two retrievers are of sim
 - Benjamini–Yekutieli correction across feature blocks: it **flags only what survives**, otherwise it abstains
 - Streamlit app with a synthetic lab, real-data audits (COMPAS, German Credit, Heart Disease) and live calibration
 - On COMPAS with 30% injected corruption, audit-guided reweighting removes most of the over-prediction for the affected group
-- Pre-registered real-data calibration on 5,000 fresh splits · 37 tests · [hosted on Streamlit Cloud](https://bias-aware-candidate-auditor.streamlit.app)
+- Pre-registered real-data calibration on 5,000 fresh splits · 6-page IEEE-style paper · 37 tests on CI · [hosted on Streamlit Cloud](https://bias-aware-candidate-auditor.streamlit.app)
 
 <sub>Team: Soumya Shradha · Tanishk Gangwar · Yagya Salwan · Vivansh Garg · Guide: Dr. Chirag Joshi</sub>
 
@@ -138,7 +138,7 @@ vivansh@github:~$ ./status --now
 ```diff
 + building   ▰▰▰▰▰▰▱▱▱▱  VaaniRakshak · live call audio + Indian-language model next
 + shipped    ▰▰▰▰▰▰▰▰▰▱  RepoAtlas on Render · Bias Auditor + Hidden-Group Bias Lab on Streamlit Cloud
-+ research   ▰▰▰▰▰▰▰▱▱▱  2 paper drafts: hybrid retrieval QA · fairness with few demographic labels
++ research   ▰▰▰▰▰▰▰▰▱▱  full paper: evidence retrieval for claim verification · fairness with few demographic labels
 + learning   ▰▰▰▰▰▱▱▱▱▱  whatever the next project needs
 ! open to    SWE / ML internships · let's talk → vivanshgarg05@gmail.com
 - bugs       ▰▰▰▰▰▰▰▰▰▰  infinite (but fixing them)
